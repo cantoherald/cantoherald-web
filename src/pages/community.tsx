@@ -17,7 +17,10 @@ export default function Community() {
     args: [0],
   });
 
-  const [subscribers, subscribedAt] = subscriberData as [string[], BigNumber[]];
+  const [subscribers, subscribedAt] = (subscriberData as [
+    string[],
+    BigNumber[]
+  ]) || [[], []];
 
   // filter out zero addresses
   const filteredSubscribers = useMemo(() => {
