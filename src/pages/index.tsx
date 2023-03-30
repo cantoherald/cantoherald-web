@@ -9,6 +9,7 @@ import {
 } from "wagmi";
 import { CantoHeraldAbi, CANTO_HERALD_ADDRESS } from "../contracts";
 import { BigNumber } from "ethers";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function Subscribe() {
   const [error, setError] = useState<string>("");
@@ -81,7 +82,7 @@ export default function Subscribe() {
         <div className="col-span-4 col-start-8">
           <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-40 text-white">
             <Headline>Subscribe!</Headline>
-            <p>
+            <p className="mb-4">
               Hit the subscribe button to subscribe to the Canto Herald
               on-chain. Read our weekly issue and participate in limited edition
               Canto Herald newspaper NFTs.
@@ -89,10 +90,11 @@ export default function Subscribe() {
             {showSuccess && (
               <p className="text-success mt-2">You are subscribed! 🎉</p>
             )}
+            {!address && <ConnectButton />}
             {!isSuccess &&
               (subscribedAt as BigNumber)?.eq(BigNumber.from("0")) && (
                 <button
-                  className="btn bg-neon hover:bg-neon/75 text-black mt-4"
+                  className="btn bg-neon hover:bg-neon/75 text-black"
                   disabled={isLoading}
                   onClick={onSubscribe}
                 >
