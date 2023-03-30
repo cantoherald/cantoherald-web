@@ -15,7 +15,7 @@ import "./index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/subscribe",
     element: <App />,
     errorElement: <ErrorPage />,
     children: routes,
