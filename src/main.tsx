@@ -1,5 +1,5 @@
 import "@rainbow-me/rainbowkit/styles.css";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider, midnightTheme } from "@rainbow-me/rainbowkit";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -10,6 +10,7 @@ import { App } from "./App";
 import { chains, client } from "./wagmi";
 import { ErrorPage } from "./error-page";
 
+import "unfonts.css";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -24,7 +25,20 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <WagmiConfig client={client}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider
+        chains={chains}
+        theme={{
+          ...midnightTheme({
+            accentColor: "#09fc99",
+            accentColorForeground: "black",
+            borderRadius: "small",
+          }),
+          fonts: {
+            ...midnightTheme().fonts,
+            body: "Minecraft, Courier, monospace",
+          },
+        }}
+      >
         <RouterProvider router={router} />
       </RainbowKitProvider>
     </WagmiConfig>

@@ -20,9 +20,11 @@ export function App() {
     <>
       <Navbar />
 
-      <Suspense fallback={<AppLoader />}>
-        <Outlet />
-      </Suspense>
+      <div className="content">
+        <Suspense fallback={<AppLoader />}>
+          <Outlet />
+        </Suspense>
+      </div>
 
       {/* {isConnected && <Account />} */}
     </>

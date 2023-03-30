@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-family: "Minecraft", Courier, monospace;
+}
+
+.content {
+  background-size: cover;
+  background-position-x: left;
+  background-position-y: top;
+  background-image: url("./assets/backgrounds/anders-nord-rsctE9xjoys-unsplash.jpg");
+}
