@@ -79,8 +79,23 @@ export default function Subscribe() {
         </span>
       </Marquee>
       <div className="grid grid-cols-12">
-        <div className="col-span-4 col-start-8">
-          <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-40 text-white">
+        <div className="col-span-10 col-start-2 sm:col-span-4 sm:col-start-8">
+          <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-8 sm:mt-40 text-white">
+            <Headline>Issue #005</Headline>
+            <p className="mb-4">
+              Click the button to read the latest issue of the Canto Herald to
+              read the newest issue of The Canto Herald.
+            </p>
+            <a
+              href="https://github.com/cantoherald/cantoherald/blob/main/Canto%20Herald_ISSUE%20005.pdf"
+              target="_blank"
+            >
+              <button className="btn bg-neon hover:bg-neon/75 text-black">
+                Read 📰
+              </button>
+            </a>
+          </div>
+          <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-8 text-white">
             <Headline>Subscribe!</Headline>
             <p className="mb-4">
               Hit the subscribe button to subscribe to the Canto Herald
