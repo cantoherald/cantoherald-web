@@ -87,7 +87,7 @@ export default function Subscribe() {
               read the newest issue of The Canto Herald.
             </p>
             <a
-              href="https://github.com/cantoherald/cantoherald/blob/main/Canto%20Herald_ISSUE%20005.pdf"
+              href="https://us21.campaign-archive.com/?u=443654daec0631342d75e1179&id=92ac2a3418"
               target="_blank"
             >
               <button className="btn bg-neon hover:bg-neon/75 text-black">
