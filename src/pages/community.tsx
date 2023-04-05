@@ -27,7 +27,7 @@ export default function Community() {
     return (subscribers as string[])?.filter(
       (subscriber: string) => subscriber !== ethers.constants.AddressZero
     );
-  }, []);
+  }, [subscribers]);
 
   return (
     <div className="grid grid-cols-12 text-white px-8 pt-8">
