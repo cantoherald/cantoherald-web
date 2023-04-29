@@ -1,4 +1,4 @@
-import { Headline, Stretcher } from "../components";
+import { Headline, Stretcher, Text } from "../components";
 import Marquee from "react-fast-marquee";
 import {
   useAccount,
@@ -9,11 +9,14 @@ import {
 } from "wagmi";
 import { CantoHeraldAbi, CANTO_HERALD_ADDRESS } from "../contracts";
 import { BigNumber } from "ethers";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Link } from "react-router-dom";
+import MailchimpSubscribe from "react-mailchimp-subscribe";
+import { MAILCHIMP_SIGNUP_URL } from "../constants";
 
 export default function Subscribe() {
   const [error, setError] = useState<string>("");
   const { address } = useAccount();
+  const [email, setEmail] = useState("");
 
   const { data: subscribedAt } = useContractRead({
     address: CANTO_HERALD_ADDRESS,
@@ -44,8 +47,6 @@ export default function Subscribe() {
     hash: subscribeResult?.hash,
     confirmations: 1,
   });
-
-  console.log("isSuccess", isSuccess, rest);
 
   const isLoading = useMemo(
     () => isLoadingSubmit || isLoadingConfirm,
@@ -79,45 +80,68 @@ export default function Subscribe() {
         </span>
       </Marquee>
       <div className="grid grid-cols-12">
-        <div className="col-span-10 col-start-2 sm:col-span-4 sm:col-start-8">
-          <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-8 sm:mt-40 text-white">
-            <Headline>Issue #005</Headline>
+        <div className="col-span-10 col-start-2 sm:col-span-8 sm:col-start-3 lg:col-span-4 lg:col-start-8">
+          <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-8 lg:mt-40 text-white">
+            <Headline>Subscribe</Headline>
             <p className="mb-4">
-              Click the button to read the latest issue of the Canto Herald to
-              read the newest issue of The Canto Herald.
+              Enter your email and hit the subscribe button to get the latest
+              news from the Canto Herald straight to your inbox.
             </p>
-            <a
-              href="https://us21.campaign-archive.com/?u=443654daec0631342d75e1179&id=92ac2a3418"
-              target="_blank"
-            >
-              <button className="btn bg-neon hover:bg-neon/75 text-black">
-                Read 📰
-              </button>
-            </a>
+            <MailchimpSubscribe
+              url={MAILCHIMP_SIGNUP_URL}
+              render={({ subscribe, status, message }) => (
+                <>
+                  <div className="input-group input-group-vertical mb-4">
+                    <input
+                      type="text"
+                      placeholder="Email address 📧"
+                      className="input input-bordered"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      disabled={!!status}
+                    />
+                    <button
+                      className="btn bg-neon hover:bg-neon/75 text-black"
+                      disabled={!!status}
+                      onClick={() => subscribe({ EMAIL: email })}
+                    >
+                      {status === "success"
+                        ? "Subscribed ✅"
+                        : status === "error"
+                        ? "Error ❌"
+                        : "Subscribe"}
+                    </button>
+                  </div>
+                  {status === "success" && (
+                    <Text className="text-sm">
+                      Success! You're almost there. To complete your newsletter
+                      subscription, please check your inbox and click the
+                      confirmation button in the email we've just sent you.
+                      Happy reading!
+                    </Text>
+                  )}
+                </>
+              )}
+            />
           </div>
           <div className="bg-base-100 rounded-lg p-4 shadow-lg mt-8 text-white">
-            <Headline>Subscribe!</Headline>
+            <Headline>Latest Episode!</Headline>
             <p className="mb-4">
-              Hit the subscribe button to subscribe to the Canto Herald
-              on-chain. Read our weekly issue and participate in limited edition
-              Canto Herald newspaper NFTs.
+              Click the button below to read the latest issue of the Canto
+              Herald.
             </p>
-            {showSuccess && (
-              <p className="text-success mt-2">You are subscribed! 🎉</p>
-            )}
-            {!address && <ConnectButton />}
-            {!isSuccess &&
-              (subscribedAt as BigNumber)?.eq(BigNumber.from("0")) && (
-                <button
-                  className="btn bg-neon hover:bg-neon/75 text-black"
-                  disabled={isLoading}
-                  onClick={onSubscribe}
-                >
-                  {isLoading ? "Subscribing..." : "Subscribe LFG 🔥"}
-                </button>
-              )}
-
-            {!!error && <p className="text-error mt-2">{error}</p>}
+            <Link
+              to="https://us21.campaign-archive.com/home/?u=443654daec0631342d75e1179&id=e5b1a0e2c2"
+              target="_blank"
+            >
+              <button
+                className="btn bg-neon hover:bg-neon/75 text-black"
+                disabled={isLoading}
+                onClick={onSubscribe}
+              >
+                Latest Issue 🗞️
+              </button>
+            </Link>
           </div>
         </div>
       </div>

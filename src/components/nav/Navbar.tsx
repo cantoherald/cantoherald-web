@@ -1,5 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { NavLink } from "./NavLink";
+import { TWITTER_URL } from "../../constants";
 
 export function Navbar() {
   return (
@@ -27,10 +28,9 @@ export function Navbar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <NavLink to="/">Subscribe!</NavLink>
-            </li>
-            <li>
-              <NavLink to="/community">Community</NavLink>
+              <NavLink to={TWITTER_URL} target="_blank">
+                Twitter
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -41,10 +41,9 @@ export function Navbar() {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <NavLink to="/">Subscribe!</NavLink>
-          </li>
-          <li>
-            <NavLink to="/community">Community</NavLink>
+            <NavLink to={TWITTER_URL} target="_blank">
+              Twitter
+            </NavLink>
           </li>
         </ul>
       </div>
